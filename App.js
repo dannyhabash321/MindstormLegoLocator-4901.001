@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { ListItem, Avatar } from "@react-native-material/core"; //List items from https://www.react-native-material.com/docs/components/list-item
+import NavBar from './components/NavBar'; //custom component
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import MainContainer from './Navigation/MainContainer';
+import HomeScreen from './Navigation/Screens/HomeScreen';
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <MainContainer/>
+    
+
+
+    //Old view for testing
+    // <View>
+    //   <HomeScreen/>
+    //   <NavBar></NavBar>
+    // </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
