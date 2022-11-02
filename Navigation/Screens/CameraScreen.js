@@ -37,16 +37,7 @@ const takePicture = async () => {
             type={type}
             />
       </View>
-      <Button
-            title="Flip Camera"
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}>
-        </Button>
+
        <Button title="Take Picture" onPress={() => takePicture()} />
         {image && <Image source={{uri: image}} style={{flex:1}}/>}
         {/* <Button title="x" onPress={() => removePicture()} /> */}
