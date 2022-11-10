@@ -18,7 +18,7 @@ function HomeScreen({navigation}){
         leading={
           <Avatar image={{ uri: "https://www.lego.com/cdn/product-assets/element.img.lod5photo.192x192/9339.jpg" }} />
         }
-        title="Brunch this weekend?"
+        title="Brunch this weekend???"
         secondaryText="I'll be in your neighborhood doing errands this…"
         onPress={() => {
           alert('You tapped the button!');
