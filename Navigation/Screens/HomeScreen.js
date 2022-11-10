@@ -7,11 +7,12 @@ import { ListItem, Avatar } from "@react-native-material/core"; //List items fro
 function HomeScreen({navigation}){
   return(
     <View backgroundColor = "#ffffff">
-    <SearchBar placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',top:50,margin:16}}/>
+
     
     <View style={{height:650 }}>
       <ScrollView style={{position:'relative',top:40, }}>
       <Text style={{position:'relative',left:20, marginBottom:10,fontWeight:'bold', fontSize:30 }}>Lego Pieces</Text>
+      <SearchBar placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',margin:16}}/>
       <TouchableWithoutFeedback>
       <ListItem
         leadingMode="avatar"
