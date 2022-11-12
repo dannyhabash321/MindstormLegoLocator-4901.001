@@ -9,7 +9,7 @@ function HomeScreen({navigation}){
     <View backgroundColor = "#ffffff">
 
     
-    <View style={{height:650 }}>
+    <View>
       <ScrollView style={{position:'relative',top:40, }}>
       <Text style={{position:'relative',left:20, marginBottom:10,fontWeight:'bold', fontSize:30 }}>Lego Pieces</Text>
       <SearchBar placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',margin:16}}/>
@@ -21,9 +21,7 @@ function HomeScreen({navigation}){
         }
         title="Brunch this weekend???"
         secondaryText="I'll be in your neighborhood doing errands this…"
-        onPress={() => {
-          alert('You tapped the button!');
-        }}
+        onPress={() => navigation.navigate('Lego',{ partId: "3213222" })}
       />
       </TouchableWithoutFeedback>
       <ListItem
@@ -33,6 +31,7 @@ function HomeScreen({navigation}){
         }
         title="Summer BBQ"
         secondaryText="Wish I could come, but I'm out of town this…"
+        onPress={() => navigation.navigate('Lego',{ partId: "xxsdsdsd" })}
       />
       <ListItem
         leadingMode="avatar"
