@@ -7,22 +7,21 @@ import { ListItem, Avatar } from "@react-native-material/core"; //List items fro
 function HomeScreen({navigation}){
   return(
     <View backgroundColor = "#ffffff">
-    <SearchBar placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',top:50,margin:16}}/>
+
     
-    <View style={{height:650 }}>
+    <View>
       <ScrollView style={{position:'relative',top:40, }}>
       <Text style={{position:'relative',left:20, marginBottom:10,fontWeight:'bold', fontSize:30 }}>Lego Pieces</Text>
+      <SearchBar placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',margin:16}}/>
       <TouchableWithoutFeedback>
       <ListItem
         leadingMode="avatar"
         leading={
           <Avatar image={{ uri: "https://www.lego.com/cdn/product-assets/element.img.lod5photo.192x192/9339.jpg" }} />
         }
-        title="Brunch this weekend?"
+        title="Brunch this weekend???"
         secondaryText="I'll be in your neighborhood doing errands this…"
-        onPress={() => {
-          alert('You tapped the button!');
-        }}
+        onPress={() => navigation.navigate('Lego',{ partId: "3213222" })}
       />
       </TouchableWithoutFeedback>
       <ListItem
@@ -32,6 +31,7 @@ function HomeScreen({navigation}){
         }
         title="Summer BBQ"
         secondaryText="Wish I could come, but I'm out of town this…"
+        onPress={() => navigation.navigate('Lego',{ partId: "xxsdsdsd" })}
       />
       <ListItem
         leadingMode="avatar"
