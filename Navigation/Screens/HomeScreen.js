@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SearchBar } from "@rneui/themed";
 import { ListItem, Avatar } from "@react-native-material/core"; //List items from https://www.react-native-material.com/docs/components/list-item
-
+import ModalTester from '../../components/Information';
 
 function HomeScreen({navigation}){
   return(
@@ -10,6 +10,30 @@ function HomeScreen({navigation}){
 
     
     <View>
+
+function ModalTester() {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Button title="Show modal" onPress={toggleModal} />
+
+      <Modal isVisible={isModalVisible}>
+        <View style={{ flex: 1 }}>
+          <Text>Hello!</Text>
+
+          <Button title="Hide modal" onPress={toggleModal} />
+        </View>
+      </Modal>
+    </View>
+  );
+}
+
+
       <ScrollView style={{position:'relative',top:40, }}>
       <Text style={{position:'relative',left:20, marginBottom:10,fontWeight:'bold', fontSize:30 }}>Lego Pieces</Text>
       <Text style={{position:'relative',left:20, marginBottom:10, fontSize:15 }}>Please select the piece you would like to identify</Text>

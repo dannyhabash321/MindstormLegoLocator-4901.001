@@ -9,9 +9,9 @@ function LegoPartScreen({ route, navigation}){
     //page html
     return(
         <View style={styles.container}>
-            <Icon.Button onPress={() => navigation.goBack()} name="left" style={styles.backButton} color="#ff0000" backgroundColor="#ffffff" size="30"> 
+            <Pressable onPress={() => navigation.navigate('Home')} name="left" style={styles.backButton} color="#ff0000" backgroundColor="#ffffff" size="30"> 
                 <Text style={{fontSize: 25, color:"#ff0000" }}>Home</Text>
-            </Icon.Button>
+            </Pressable>
             <View style={styles.partContainer}>
                 <Text style={styles.title}>Big Bossman Lego #{partId}</Text>
                 <Image style={styles.image} source={require(imageSource)} />
