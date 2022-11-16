@@ -7,38 +7,6 @@ import ModalTester from '../../components/Information';
 
 function HomeScreen({navigation}){
 
-  // function ModalTester() {
-  //   const [isModalVisible, setModalVisible] = useState(false);
-  
-  //   const toggleModal = () => {
-  //     setModalVisible(!isModalVisible);
-  //   };
-  
-  //   return (
-  //     <View style={{top:40}}>
-  //       <TouchableOpacity onPress={toggleModal} style={styles.informationStyle} activeOpacity={0.5}>
-  //       <Image 
-  //         source={require('../../assets/information.png')} 
-  //         style={styles.ImageIconStyle} 
-  //       />
-  //       </TouchableOpacity>
-    
-  //       <Modal isVisible={isModalVisible}>
-  //         <View style={{flex:1}}>
-  //           {/* <Text>Hello!</Text> */}
-  
-  //         <TouchableOpacity onPress={toggleModal} style={styles.informationStyle} activeOpacity={0.5}>
-  //         <Image 
-  //           source={require('../../assets/information.png')} 
-  //           style={styles.ImageIconStyle} 
-  //         />
-  //         </TouchableOpacity>
-  //         </View>
-  //       </Modal>
-  //     </View>
-  //   );
-  // }
-
   return(
     <View backgroundColor = "#ffffff">
 
@@ -156,28 +124,5 @@ function HomeScreen({navigation}){
       </View>
     );
 }
-
-
-// const styles = StyleSheet.create({
-//   informationStyle: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     backgroundColor: '#485a96',
-//     borderWidth: .5,
-//     borderColor: '#fff',
-//     width: 40,
-//     height: 40,
-//     borderRadius: 5,
-//     margin: 5,
-   
-//   },
-   
-//   ImageIconStyle: {
-//      padding: 10,
-//      margin: 5,
-//      height: 30,
-//      width: 30,   
-//   }
-// });
 
 export default HomeScreen
