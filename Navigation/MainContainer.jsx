@@ -16,23 +16,13 @@ import SettingsScreen from './Screens/SettingsScreen'
 import LegoPartScreen from './Screens/LegoPartScreen';
 
 //Screen Names
-const homeStackName = 'HomeStack'
+// const homeStackName = 'HomeStack'
 const homeName = "Home"
 const cameraName = "Camera";
 const settingsName = "Settings";
 const legoPartsName = "Lego"
 
 const Tab = createBottomTabNavigator();
-
-// this component returns two seperate components that can be accessed in the same tab
-function Home() {
-  return (
-    <Tab.Navigator  initialRouteName={homeName}>
-      <Tab.Screen options={{ headerShown: false,tabBarStyle: { display: "none" }}} name={homeName} component={HomeScreen} />
-      <Tab.Screen options={{ headerShown: false,tabBarStyle: { display: "none" }}} name={legoPartsName} component={LegoPartScreen} />
-    </Tab.Navigator>
-  );
-}
 
 
 export default function MainContainer(){
@@ -41,13 +31,21 @@ export default function MainContainer(){
         <Tab.Navigator 
           initialRouteName={homeName}
           screenOptions={({ route }) => ({
+            tabBarButton: [
+              legoPartsName,
+            ].includes(route.name)
+              ? () => {
+                  return null;
+                }
+              : undefined,
+
             tabBarShowLabel: false,
             tabBarStyle: { height: 130 },
             tabBarIcon: ({ focused}) => {
               let outlined;
               let rn = route.name;
   
-              if (rn === homeStackName) {
+              if (rn === homeName) {
                 outlined = focused ? '#ff0000' : '#808080';
                 return (
                     <View>
@@ -78,11 +76,11 @@ export default function MainContainer(){
             },
           })}>
           
-          {/* this tab contains the home screen as well as the lego parts screen */}
-          <Tab.Screen options={{headerShown: false}} name={homeStackName} component={Home} />
 
+          <Tab.Screen options={{ headerShown: false}}name={homeName} component={HomeScreen} />
           <Tab.Screen options={{headerShown: false}} name={cameraName} component={CameraScreen} />
           <Tab.Screen options={{headerShown: false}} name={settingsName} component={SettingsScreen} />
+          <Tab.Screen options={{ headerShown: false}} name={legoPartsName} component={LegoPartScreen} />
 
         </Tab.Navigator>
       </NavigationContainer>

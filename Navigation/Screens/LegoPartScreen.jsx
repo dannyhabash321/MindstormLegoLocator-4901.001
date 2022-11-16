@@ -1,28 +1,86 @@
-import { StyleSheet, Text, View, ScrollView,Image, Pressable } from 'react-native';
+import { StyleSheet,Modal, Text, View, ScrollView,Image, Pressable, Touchable, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Divider} from 'react-native-paper';
+// import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
+
 
 function LegoPartScreen({ route, navigation}){
-    //params to be passed from homepage
-    const partId = route.params.partId;
-    const imageSource = '../../assets/exampleLego.png'
+    //params passed from homepage
+    const partId = route.params.item.PartID;
+    const legoName = route.params.item.PartName;
+    const legoSet = route.params.item.SetNumber;
+    const legoColor = route.params.item.Colour;
+    const legoQuantity = route.params.item.Quantity;
+    const imageURL = route.params.item.ImageURL;
+    // const legoSetCount = route.params.item.SetCount;
+    const legoCategory = route.params.item.Category;
+   
+    //variable to toggle full screen image
+    const [showModal, setShowModal] = useState(false)
+
+    
+
+
+
     //page html
     return(
+
         <View style={styles.container}>
+            {/* modal not present until photo is clicked */}
+            <Modal 
+                    animationType="slide"
+                    transparent={false}
+                    visible={showModal}
+                    onPress = {() => alert("Cock")}
+                    onRequestClose={() => {
+                    alert("Modal has been closed.");
+                    setModalVisible(!showModal);
+                    }}
+            > 
+                <View style={{ backgroundColor: "black"}}>
+                    <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onTouchStart={() => setShowModal(!showModal)}
+                    >
+                    <Image
+                        style={{ width: '100%', height: "100%", resizeMode: 'contain' }}
+                        source={{ uri: imageURL }}
+                    />
+                    </Pressable>
+                </View>
+            </Modal>
+            
+            
             <Icon.Button onPress={() => navigation.goBack()} name="left" style={styles.backButton} color="#ff0000" backgroundColor="#ffffff" size="30"> 
                 <Text style={{fontSize: 25, color:"#ff0000" }}>Home</Text>
             </Icon.Button>
             <View style={styles.partContainer}>
-                <Text style={styles.title}>Big Bossman Lego #{partId}</Text>
-                <Image style={styles.image} source={require(imageSource)} />
+                <Text style={styles.title}>{legoName} #{partId}</Text>
+                
+                <TouchableOpacity onPress = {() => setShowModal(true)}>
+                    <Image style={styles.image}
+                        source={{
+                        uri: imageURL,
+                        }}
+                    />
+                </TouchableOpacity>
+
+                
+                
             </View>
             
             <View style={{padding: 15}}>
-                <Text style={styles.infoText}>Set: Lego EV3</Text>
+                <Text style={styles.infoText}>{'Set #: ' + legoSet} </Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={styles.infoText}>Color: Yellow</Text>
+                <Text style={styles.infoText}>{'Color: ' + legoColor}</Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={styles.infoText}>Quantity: 20</Text>
+                <Text style={styles.infoText}>{'Quantity: ' + legoQuantity}</Text>
+                <Divider style={{height: 1.5}}/>
+                <Text style={styles.infoText}>{'Category: ' + legoCategory}</Text>
+                {/* <Divider style={{height: 1.5}}/>
+                <Text style={styles.infoText}>{'Set Count: ' + legoSetCount}</Text> */}
             </View>
 
             <Pressable style={styles.locateButton} onPress={() => navigation.navigate('Camera')}>
@@ -35,8 +93,10 @@ function LegoPartScreen({ route, navigation}){
 
 //page styling
 const styles = StyleSheet.create({
+
     locateButton: {
-        bottom:"1%",
+        position: "absolute",
+        top:"90%",
         left: "10%",
         alignItems: 'center',
         justifyContent: 'center',
@@ -52,29 +112,32 @@ const styles = StyleSheet.create({
     },
     
     infoText:{
-        fontSize: 25,
+        fontSize: 22,
         padding: 15,
         fontWeight: "bold"
     },
     
     image:{
-        top: "10%",
-        width:"41%",
-        height: "55%"
+        top: "3%",
+        left: "5%",
+        width: '90%',
+        height: '80%',
+        resizeMode: 'contain',
+        objectfit: "contain"
     },
     title:{
         position: "relative",
-        top: "10%",
-        fontSize: 30,
+        top: "5%",
+        fontSize: 25,
         padding: 10,
         textAlign: "center",
         fontWeight: "bold"
         
     },
     partContainer:{
-        alignItems: 'center',
+        // alignItems: 'center',
         width: "85%",
-        height: "50%",
+        height: "37.5%",
         backgroundColor: '#ffffff',
         marginTop: 15,
         marginLeft: "7.5%",
