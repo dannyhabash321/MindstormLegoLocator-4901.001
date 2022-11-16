@@ -21,9 +21,6 @@ function LegoPartScreen({ route, navigation}){
     const [showModal, setShowModal] = useState(false)
 
     
-
-
-
     //page html
     return(
 
@@ -41,6 +38,7 @@ function LegoPartScreen({ route, navigation}){
             > 
                 <View style={{ backgroundColor: "black"}}>
                     <Pressable
+                    
                         style={[styles.button, styles.buttonClose]}
                         onTouchStart={() => setShowModal(!showModal)}
                     >
@@ -53,9 +51,9 @@ function LegoPartScreen({ route, navigation}){
             </Modal>
             
             
-            <Icon.Button onPress={() => navigation.goBack()} name="left" style={styles.backButton} color="#ff0000" backgroundColor="#ffffff" size="30"> 
+            <Icon onPress={() => navigation.goBack()} name="left" style={styles.backButton} color="#ff0000" backgroundColor="#ffffff" size="30"> 
                 <Text style={{fontSize: 25, color:"#ff0000" }}>Home</Text>
-            </Icon.Button>
+            </Icon>
             <View style={styles.partContainer}>
                 <Text style={styles.title}>{legoName} #{partId}</Text>
                 
