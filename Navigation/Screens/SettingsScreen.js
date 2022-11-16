@@ -10,12 +10,7 @@ function SettingsScreen({navigation}){
         <View style={styles.container}>
             <Text style={{marginTop:80,marginLeft:20,fontSize:24, fontWeight:'bold'}}>Instructions</Text>
             <Divider style={{ marginTop: 10,marginLeft:20,marginRight:20,}}/>
-            <Text style={{marginTop:30,marginLeft:20,marginRight:20,fontSize:20, fontWeight:'bold'}}>1. Select the camera button</Text>
-            <Text style={{marginTop:30,marginLeft:20,marginRight:20,fontSize:20, fontWeight:'bold'}}>2. Take an aerial shot of the trays</Text>
-            <Text style={{marginTop:30,marginLeft:20,marginRight:20,fontSize:20, fontWeight:'bold'}}>3. Select the lego piece you are looking for</Text>
-            <Text style={{marginTop:30,marginLeft:20,marginRight:20,fontSize:20, fontWeight:'bold'}}>4. The app will tell you where the lego piece is located on the tray</Text>
-            <Text style={{marginTop:30,marginLeft:20,marginRight:20,fontSize:20, fontWeight:'bold'}}>5. If you need additional help finding the lego piece, the app will help you find the piece with sound with Live Feed Mode</Text>
-            <Text style={{marginTop:30,marginLeft:20,marginRight:20,fontSize:20, fontWeight:'bold'}}>6. Enjoy the app and have fun! </Text>
+
             <Divider style={{ marginTop: 30,marginLeft:20,marginRight:20,}}/>
             <Text style={{marginTop:30,marginLeft:20,fontSize:24, fontWeight:'bold'}}>Settings</Text>
             <Stack fill left spacing={20}>
