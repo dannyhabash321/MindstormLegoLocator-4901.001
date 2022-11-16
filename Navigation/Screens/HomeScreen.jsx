@@ -1,15 +1,18 @@
-import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback} from 'react-native';
+
 import { StatusBar } from 'expo-status-bar';
 import { SearchBar } from "@rneui/themed";
 import { ListItem, Avatar } from "@react-native-material/core"; //List items from https://www.react-native-material.com/docs/components/list-item
-
+import ModalTester from '../../components/Information';
 
 function HomeScreen({navigation}){
+
   return(
     <View backgroundColor = "#ffffff">
 
-    
+ 
     <View>
+    <ModalTester></ModalTester> 
       <ScrollView style={{position:'relative',top:40, }}>
       <Text style={{position:'relative',left:20, marginBottom:10,fontWeight:'bold', fontSize:30 }}>Lego Pieces</Text>
       <Text style={{position:'relative',left:20, marginBottom:10, fontSize:15 }}>Please select the piece you would like to identify</Text>
