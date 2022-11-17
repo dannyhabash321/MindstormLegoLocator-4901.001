@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Text, View, StyleSheet, TouchableOpacity, Image, Pressable } from "react-native";
 import Modal from "react-native-modal";
 
-function ModalTester() {
+function InformationModal() {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
@@ -97,4 +97,4 @@ ExitText: {
 },
 
 });
-export default ModalTester;
+export default InformationModal;
