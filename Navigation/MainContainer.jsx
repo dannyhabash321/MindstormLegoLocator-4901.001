@@ -16,7 +16,7 @@ import HomeScreen from './Screens/HomeScreen'
 import CameraScreen from './Screens/CameraScreen'
 import SettingsScreen from './Screens/SettingsScreen'
 import LegoPartScreen from './Screens/LegoPartScreen';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useEffect } from 'react';
 
 //Screen Names
@@ -32,6 +32,10 @@ const Tab = createBottomTabNavigator();
 export default function MainContainer(){
     const [mode, setMode] = useState(false);
 
+    // // theme
+    // const theme = useContext(themeContext);
+
+
     useEffect(() => {
       let eventListener = EventRegister.addEventListener("changeTheme", (data) => {
         setMode(data);
@@ -44,7 +48,7 @@ export default function MainContainer(){
     return(
 
         <themeContext.Provider value = {mode === true ? theme.dark : theme.light} >
-        <NavigationContainer>
+        <NavigationContainer >
         <Tab.Navigator 
           initialRouteName={homeName}
           screenOptions={({ route }) => ({
@@ -57,7 +61,7 @@ export default function MainContainer(){
               : undefined,
 
             tabBarShowLabel: false,
-            tabBarStyle: { height: 130 },
+            tabBarStyle: { height: 130, backgroundColor: mode === true ? "#1b4469" : "white" },
             tabBarIcon: ({ focused}) => {
               let outlined;
               let rn = route.name;
