@@ -37,7 +37,7 @@ function HomeScreen({navigation}){
  return(
     <View backgroundColor = "#ffffff">
     <ModalTester></ModalTester> 
-      <ScrollView style={{position:'relative',top:40, }}>
+      <ScrollView style={{position:'relative',top:40,marginBottom:90}}>
       <Text style={{position:'relative',left:20, marginBottom:10,fontWeight:'bold', fontSize:30 }}>Lego Pieces</Text>
       <Text style={{position:'relative',left:20, marginBottom:10, fontSize:15 }}>Please select the piece you would like to identify</Text>
       <SearchBar onChangeText={updateSearch} value={searchTerm} placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',margin:16}}/>
