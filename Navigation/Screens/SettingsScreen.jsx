@@ -1,28 +1,38 @@
 //import * as React from 'react';
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Divider,Stack, Switch } from "@react-native-material/core";
-function SettingsScreen({navigation}){
-    const [checked, setChecked] = useState(true);
-    const [enabled, setEnabled] = useState(true);
-    return(
-        
-        <View style={styles.container}>
-            <Text style={{marginTop:80,marginLeft:20,fontSize:24, fontWeight:'bold'}}>Instructions</Text>
-            <Divider style={{ marginTop: 10,marginLeft:20,marginRight:20,}}/>
 
-            <Divider style={{ marginTop: 30,marginLeft:20,marginRight:20,}}/>
-            <Text style={{marginTop:30,marginLeft:20,fontSize:24, fontWeight:'bold'}}>Settings</Text>
-            <Stack fill left spacing={20}>
-            <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:10}}>
-            <Switch value={checked} onValueChange={() => setChecked(!checked)} onPress={() => setChecked(!checked)}/>
-            <Text style={{marginLeft:10,fontSize:20,}}>Dark Mode</Text>
+import { EventRegister } from 'react-native-event-listeners';
+import themeContext from "../../config/themeContext";
+
+
+function SettingsScreen({navigation}){
+    const [enabled, setEnabled] = useState(true);
+    const theme = useContext(themeContext);
+    const [mode, setMode] = useState(false);
+
+    return(
+        <View style={[styles.container, {backgroundColor: theme.background}]}>
+
+            <Text style={{marginTop:100, marginLeft:50,fontSize:32, fontWeight:'bold', color: theme.color}}>Settings</Text>
+            <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:50}}>
+            <Switch value={mode} onValueChange={(value) => {
+              
+              setMode(value);
+              EventRegister.emit("changeTheme", value);
+              
+              
+              }} onPress={() => setMode(!mode)}/>
+            
+            
+            
+            <Text style={ {...styles.text, color: theme.color}}>Dark Mode</Text>
             </View>
             <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:10}}>
             <Switch value={enabled} onValueChange={() => setEnabled(!enabled)} onPress={() => setEnabled(!enabled)}/>
-            <Text style={{marginLeft:10,fontSize:20,}}>Enable Accessibility Features</Text>
+            <Text style={ {...styles.text, color: theme.color}}>Enable Accessibility Features</Text>
             </View>
-            </Stack>
 
         </View>
     )
@@ -43,7 +53,8 @@ const styles = StyleSheet.create({
       alignItems: "center",
     },
     text:{
-        fontWeight:"bold"
+      marginLeft:10,
+      fontSize:20,
     }
   });
 export default SettingsScreen

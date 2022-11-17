@@ -7,13 +7,17 @@ import Feather from 'react-native-vector-icons/Feather'; // Icon from https://gi
 import EvilIcons from 'react-native-vector-icons/EvilIcons';// Icon from https://github.com/oblador/react-native-vector-icons
 import Entypo from 'react-native-vector-icons/Entypo'; //Icon from https://github.com/oblador/react-native-vector-icons
 import { BottomTabBar } from '@react-navigation/bottom-tabs'
-
+import { EventRegister } from 'react-native-event-listeners';
+import themeContext from '../config/themeContext';
+import theme from '../config/theme';
 
 //Screens
 import HomeScreen from './Screens/HomeScreen'
 import CameraScreen from './Screens/CameraScreen'
 import SettingsScreen from './Screens/SettingsScreen'
 import LegoPartScreen from './Screens/LegoPartScreen';
+import { useState, useContext } from 'react';
+import { useEffect } from 'react';
 
 //Screen Names
 // const homeStackName = 'HomeStack'
@@ -26,8 +30,25 @@ const Tab = createBottomTabNavigator();
 
 
 export default function MainContainer(){
+    const [mode, setMode] = useState(false);
+
+    // // theme
+    // const theme = useContext(themeContext);
+
+
+    useEffect(() => {
+      let eventListener = EventRegister.addEventListener("changeTheme", (data) => {
+        setMode(data);
+      });
+      return() => {
+        EventRegister.removeEventListener(eventListener);
+      };
+    });
+
     return(
-        <NavigationContainer>
+
+        <themeContext.Provider value = {mode === true ? theme.dark : theme.light} >
+        <NavigationContainer >
         <Tab.Navigator 
           initialRouteName={homeName}
           screenOptions={({ route }) => ({
@@ -40,7 +61,7 @@ export default function MainContainer(){
               : undefined,
 
             tabBarShowLabel: false,
-            tabBarStyle: { height: 130 },
+            tabBarStyle: { height: 130, backgroundColor: mode === true ? "#1b4469" : "white" },
             tabBarIcon: ({ focused}) => {
               let outlined;
               let rn = route.name;
@@ -84,6 +105,7 @@ export default function MainContainer(){
 
         </Tab.Navigator>
       </NavigationContainer>
+      </themeContext.Provider>
     );
 
 }

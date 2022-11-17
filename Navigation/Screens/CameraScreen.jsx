@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'expo-camera';
 import { shareAsync } from 'expo-sharing';
 import * as MediaLibrary from 'expo-media-library';
-import ModalTester from '../../components/Information';
+import InformationModal from '../../components/Information';
 
 
 export default function App() {
