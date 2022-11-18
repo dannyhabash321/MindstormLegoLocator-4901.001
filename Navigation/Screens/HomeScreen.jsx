@@ -48,11 +48,11 @@ function HomeScreen({navigation}){
     
     <View style={{backgroundColor: theme.background}}>
     <InformationModal></InformationModal> 
-      <ScrollView style={{position:'relative',top:40,marginBottom:90, backgroundColor: theme.background}}>
+    
       <Text style={{...styles.text, left:20,fontWeight:'bold', fontSize:30, color: theme.color}}>Lego Pieces</Text>
       <Text style={{...styles.text, color: theme.color}}>Please select the piece you would like to identify</Text>
       <SearchBar onChangeText={updateSearch} value={searchTerm} placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',margin:16}}/>
-      <Divider style={{ marginTop: 10,marginLeft:20,marginRight:20,}}/>
+      <ScrollView style={{position:'relative',top:40,marginBottom:90, backgroundColor: theme.background}}>
       {/* iterate over the json file and print one by one */}
      
       <FlatList
