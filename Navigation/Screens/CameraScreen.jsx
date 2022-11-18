@@ -1,30 +1,38 @@
-import React, {useRef, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  Pressable,
-  Modal,
-  Text,
-  ActivityIndicator,
-} from 'react-native';
-
-import {
-  getModel,
-  convertBase64ToTensor,
-  startPrediction,
-} from '../../helpers/tensor-helper';
+import React, {useRef, useState, useEffect} from 'react';
+import {View,StyleSheet,Dimensions,Pressable,Modal,Text,ActivityIndicator,} from 'react-native';
+import * as MediaLibrary from 'expo-media-library';
+import {getModel,convertBase64ToTensor,startPrediction} from '../../helpers/tensor-helper';
 import {cropPicture} from '../../helpers/image-helper';
-
 import {Camera} from 'expo-camera';
+
+
 
 const RESULT_MAPPING = ['Triangle', 'Circle', 'Square'];
 
 const CameraScreen = () => {
   
   const cameraRef = useRef();
+  const [hasCameraPermission, setHasCameraPermission] = useState();
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [isProcessing, setIsProcessing] = useState(false);
   const [presentedShape, setPresentedShape] = useState('');
+
+
+  useEffect(() => {
+      (async () => {
+        const cameraPermission = await Camera.requestCameraPermissionsAsync();
+        const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+        setHasCameraPermission(cameraPermission.status === "granted");
+        setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
+      })();
+    }, []);
+
+    if (hasCameraPermission === undefined) {
+      return <Text>Requesting permissions...</Text>
+    } else if (!hasCameraPermission) {
+      return <Text>Permission for camera not granted. Please change this in settings.</Text>
+    }
+
 
   const handleImageCapture = async () => {
     setIsProcessing(true);
