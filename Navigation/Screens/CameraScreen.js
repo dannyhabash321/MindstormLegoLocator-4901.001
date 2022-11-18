@@ -21,6 +21,7 @@ import {Camera} from 'expo-camera';
 const RESULT_MAPPING = ['Triangle', 'Circle', 'Square'];
 
 const CameraScreen = () => {
+  
   const cameraRef = useRef();
   const [isProcessing, setIsProcessing] = useState(false);
   const [presentedShape, setPresentedShape] = useState('');

@@ -63,7 +63,7 @@ function HomeScreen({navigation}){
           //   secondaryText={'Category: ' + item.Category}
             
           // />
-          <ListItem containerStyle={{backgroundColor: theme.theme == "dark" ? "#426788" : theme.background}}  key={item.PartID} bottomDivider>
+          <ListItem key={item.PartID} onPress={() => navigation.navigate('Lego',{ item:item})} containerStyle={{backgroundColor: theme.theme == "dark" ? "#426788" : theme.background}}   bottomDivider>
           <Avatar size={70} source={{ uri: item.ImageURL }} />
           <ListItem.Content>
             <ListItem.Title style={{color: theme.color}}>{item.PartName}</ListItem.Title>
