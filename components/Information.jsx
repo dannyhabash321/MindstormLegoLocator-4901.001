@@ -13,12 +13,12 @@ function InformationModal() {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
+// source= theme.theme == "dark" ? require('../assets/information.png') : require('../assets/lightInfo.png')
   return (
     <View style={{top:40, backgroundColor: theme.background}}>
       <TouchableOpacity onPress={toggleModal} style={{...styles.InformationStyle, backgroundColor: theme.background}} >
       <Image 
-        source={require('../assets/information.png')} 
+        source={theme.theme == "dark" ? require('../assets/lightInfo.png') : require('../assets/information.png')} 
         style={{...styles.ImageIconStyle, backgroundColor: theme.background}}
       />
       </TouchableOpacity>
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   InformationStyle: {
     marginLeft: 'auto',
     backgroundColor: '#FFFFFF',
-    borderWidth: 3,
     width: 40,
     height: 40,
     borderRadius: 5,

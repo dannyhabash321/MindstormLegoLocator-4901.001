@@ -1,10 +1,11 @@
 import { StyleSheet,Modal, Text, View, ScrollView,Image, Pressable, Touchable, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Divider} from 'react-native-paper';
 // import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-
+// for theming page: react useContext and below
+import themeContext from '../../config/themeContext';
 
 function LegoPartScreen({ route, navigation}){
     //params passed from homepage
@@ -20,11 +21,13 @@ function LegoPartScreen({ route, navigation}){
     //variable to toggle full screen image
     const [showModal, setShowModal] = useState(false)
 
+    // theme
+    const theme = useContext(themeContext);
     
     //page html
     return(
 
-        <View style={styles.container}>
+        <View style={{...styles.container, backgroundColor: theme.theme == "dark" ? "#282C34" : theme.background}}>
             {/* modal not present until photo is clicked */}
             <Modal 
                     animationType="slide"
@@ -51,11 +54,12 @@ function LegoPartScreen({ route, navigation}){
             </Modal>
             
             
-            <Icon onPress={() => navigation.goBack()} name="left" style={styles.backButton} color="#ff0000" backgroundColor="#ffffff" size="30"> 
-                <Text style={{fontSize: 25, color:"#ff0000" }}>Home</Text>
-            </Icon>
+            <Pressable onPress={() => navigation.goBack()} name="left" style={{...styles.backButton, backgroundColor: theme.theme == "dark" ? "#282C34" : theme.background}} size="30"> 
+                <Text style={{fontSize: 25, color:"#ff0000", left: 5 }}> {'<'} Home</Text>
+            </Pressable>
+
             <View style={styles.partContainer}>
-                <Text style={styles.title}>{legoName} #{partId}</Text>
+                <Text style={{...styles.title}}>{legoName} #{partId}</Text>
                 
                 <TouchableOpacity onPress = {() => setShowModal(true)}>
                     <Image style={styles.image}
@@ -66,19 +70,18 @@ function LegoPartScreen({ route, navigation}){
                 </TouchableOpacity>
 
                 
-                
             </View>
             
             <View style={{padding: 15}}>
-                <Text style={styles.infoText}>{'Set #: ' + legoSet} </Text>
+                <Text style={{...styles.infoText, color: theme.color}}>{'Set #: ' + legoSet} </Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={styles.infoText}>{'Color: ' + legoColor}</Text>
+                <Text style={{...styles.infoText, color: theme.color}}>{'Color: ' + legoColor}</Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={styles.infoText}>{'Quantity: ' + legoQuantity}</Text>
+                <Text style={{...styles.infoText, color: theme.color}}>{'Quantity: ' + legoQuantity}</Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={styles.infoText}>{'Category: ' + legoCategory}</Text>
+                <Text style={{...styles.infoText, color: theme.color}}>{'Category: ' + legoCategory}</Text>
                 {/* <Divider style={{height: 1.5}}/>
-                <Text style={styles.infoText}>{'Set Count: ' + legoSetCount}</Text> */}
+                <Text style={{...styles.infoText, color: theme.color}}>{'Set Count: ' + legoSetCount}</Text> */}
             </View>
 
             <Pressable style={styles.locateButton} onPress={() => navigation.navigate('Camera')}>
@@ -114,7 +117,6 @@ const styles = StyleSheet.create({
         padding: 15,
         fontWeight: "bold"
     },
-    
     image:{
         top: "3%",
         left: "5%",
