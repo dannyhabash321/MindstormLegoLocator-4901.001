@@ -7,7 +7,7 @@ import {Camera} from 'expo-camera';
 
 
 
-const RESULT_MAPPING = ['Triangle', 'Circle', 'Square'];
+const RESULT_MAPPING = ['Long Grey Single Brick', 'White L Brick', 'Long Black Double Brick','Little Red Piece','Little Black Connector'];
 
 const CameraScreen = () => {
   
@@ -38,6 +38,7 @@ const CameraScreen = () => {
     setIsProcessing(true);
     const imageData = await cameraRef.current.takePictureAsync({
       base64: true,
+      quality: 1,
     });
     processImagePrediction(imageData);
   };
@@ -48,11 +49,12 @@ const CameraScreen = () => {
     const tensor = await convertBase64ToTensor(croppedData.base64);
 
     const prediction = await startPrediction(model, tensor);
-
+    console.log(prediction)
     const highestPrediction = prediction.indexOf(
       Math.max.apply(null, prediction),
     );
     setPresentedShape(RESULT_MAPPING[highestPrediction]);
+
   };
 
   return (
