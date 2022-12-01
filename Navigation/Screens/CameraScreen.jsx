@@ -44,9 +44,14 @@ const CameraScreen = () => {
   };
 
   const processImagePrediction = async (base64Image) => {
+    
+
+    
     const croppedData = await cropPicture(base64Image, 300);
     const model = await getModel();
     const tensor = await convertBase64ToTensor(croppedData.base64);
+
+    MediaLibrary.saveToLibraryAsync(croppedData.uri)
 
     const prediction = await startPrediction(model, tensor);
     console.log(prediction)

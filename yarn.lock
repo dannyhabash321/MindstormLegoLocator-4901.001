@@ -4644,10 +4644,10 @@ expo-asset@~8.6.1:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
-expo-camera@~12.3.0:
-  version "12.3.0"
-  resolved "https://registry.npmjs.org/expo-camera/-/expo-camera-12.3.0.tgz"
-  integrity sha512-niQ2kywvhLYzK0zj+8Xq5q77eeA10MdauKg7RKWGMNehht33uOXTP1pzAXwcPbQ0De3nRmddIlRQkkxV8ey7YQ==
+expo-camera@~12.4.0:
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-12.4.0.tgz#ee8bffa2678c7fb1f0903e831b392dc12e54a557"
+  integrity sha512-GEBnnzg4HJiQsQcuCWNF6AenFX5v3HsXe2Q3D5j82BZTaZG/X9uGV2No32N41VgQ0xHsP8HuXfCis9rTPR+wxg==
   dependencies:
     "@expo/config-plugins" "~5.0.0"
     "@koale/useworker" "^4.0.2"
