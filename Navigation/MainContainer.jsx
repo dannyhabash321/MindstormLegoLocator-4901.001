@@ -8,8 +8,13 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';// Icon from https:/
 import Entypo from 'react-native-vector-icons/Entypo'; //Icon from https://github.com/oblador/react-native-vector-icons
 import { BottomTabBar } from '@react-navigation/bottom-tabs'
 import { EventRegister } from 'react-native-event-listeners';
+//theme and context
 import themeContext from '../config/themeContext';
 import theme from '../config/theme';
+
+//textIncrease and context
+import textIncrease from '../config/textIncrease';
+import textIncreaseContext from '../config/textIncreaseContext';
 
 //Screens
 import HomeScreen from './Screens/HomeScreen'
@@ -31,6 +36,7 @@ const Tab = createBottomTabNavigator();
 
 export default function MainContainer(){
     const [mode, setMode] = useState(false);
+    const [textSize, setTextSize] = useState(1);
 
     // // theme
     // const theme = useContext(themeContext);
@@ -45,8 +51,18 @@ export default function MainContainer(){
       };
     });
 
-    return(
 
+    useEffect(() => {
+      let textEventListener = EventRegister.addEventListener("changeTextSize", (data) => {
+        setTextSize(data);
+      });
+      return() => {
+        EventRegister.removeEventListener(textEventListener);
+      };
+    });
+
+    return(
+        <textIncreaseContext.Provider value = {textSize}>
         <themeContext.Provider value = {mode === true ? theme.dark : theme.light} >
         <NavigationContainer >
         <Tab.Navigator 
@@ -106,6 +122,7 @@ export default function MainContainer(){
         </Tab.Navigator>
       </NavigationContainer>
       </themeContext.Provider>
+      </textIncreaseContext.Provider>
     );
 
 }
