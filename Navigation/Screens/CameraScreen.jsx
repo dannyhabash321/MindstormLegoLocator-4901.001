@@ -6,7 +6,14 @@ import { shareAsync } from 'expo-sharing';
 import * as MediaLibrary from 'expo-media-library';
 import InformationModal from '../../components/Information';
 
+/* Function CameraScreen
+   Purpose: Camera Display and basic functionality
+   Notes:
+      Lines 14-26 setting up camera usage permissions to media library and camera 
+      Lines 37-79 camera functionality: taking pictures, discarding picture, save picture,pick picture from library
+      Lines 79-96 styling of camera container for camera screen  
 
+*/
 export default function App() {
   let cameraRef = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
