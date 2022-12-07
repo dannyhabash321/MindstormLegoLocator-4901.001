@@ -6,7 +6,13 @@ import { Divider,Stack, Switch } from "@react-native-material/core";
 import { EventRegister } from 'react-native-event-listeners';
 import themeContext from "../../config/themeContext";
 
-
+/* Function SettingsScreen
+   Purpose: Displays Settings
+   Notes:
+      Line 24: Displays Settings Title
+      Line 25-37: Displays Dark Mode Switch
+      Lines 38-41: Displays Enable Accessibility Features Switch
+*/
 function SettingsScreen({navigation}){
     const [enabled, setEnabled] = useState(true);
     const theme = useContext(themeContext);
