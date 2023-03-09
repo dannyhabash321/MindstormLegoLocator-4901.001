@@ -50,9 +50,10 @@ function HomeScreen({navigation}){
       <ScrollView style={{position:'relative',top:40,marginBottom:90, backgroundColor: theme.background}}>
       <Text style={{...styles.text, left:20,fontWeight:'bold', fontSize:30, color: theme.color}}>Lego Pieces</Text>
       <Text style={{...styles.text, color: theme.color}}>Please select the piece you would like to identify</Text>
-      <SearchBar onChangeText={updateSearch} value={searchTerm} placeholder="Search" lightTheme="true" platform="ios"containerStyle={{position:'relative',margin:16}}/>
+      <SearchBar onChangeText={updateSearch} value={searchTerm} placeholder="Search" platform="ios" containerStyle={{position:'relative',margin:16, backgroundColor: theme.background}}/>
       <Divider style={{ marginTop: 10,marginLeft:20,marginRight:20,}}/>
       {/* iterate over the json file and print one by one */}
+      
       {results.map(item => (
           // <ListItem  key = {item.PartID} onPress={() => navigation.navigate('Lego',{ item:item})}#1b314b
           //   leadingMode="avatar"
@@ -63,7 +64,8 @@ function HomeScreen({navigation}){
           //   secondaryText={'Category: ' + item.Category}
             
           // />
-          <ListItem key = {item.PartID} onPress={() => navigation.navigate('Lego',{ item:item})} containerStyle={{backgroundColor: theme.theme == "dark" ? "#282C34" : theme.background}} bottomDivider>
+          
+          <ListItem key = {item.PartID} onPress={() => navigation.navigate('Lego',{ item:item})} containerStyle={{backgroundColor: theme.theme == "dark" ? "#000000" : theme.background}} bottomDivider>
           <Avatar size={70} source={{ uri: item.ImageURL }} />
           <ListItem.Content>
             <ListItem.Title style={{color: theme.color}}>{item.PartName}</ListItem.Title>
