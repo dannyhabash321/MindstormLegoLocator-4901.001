@@ -21,7 +21,7 @@ function SettingsScreen({navigation}){
     return(
         <View style={[styles.container, {backgroundColor: theme.background}]}>
 
-            <Text style={{marginTop:100, marginLeft:50,fontSize:32, fontWeight:'bold', color: theme.color}}>Settings</Text>
+            <Text style={{marginTop:100, marginLeft:30,fontSize:32, fontWeight:'bold', color: theme.color}}>Settings</Text>
             <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:50}}>
             <Switch value={mode} onValueChange={(value) => {
               
@@ -38,6 +38,12 @@ function SettingsScreen({navigation}){
             <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:10}}>
             <Switch value={enabled} onValueChange={() => setEnabled(!enabled)} onPress={() => setEnabled(!enabled)}/>
             <Text style={ {...styles.text, color: theme.color}}>Enable Accessibility Features</Text>
+            </View>
+            
+            
+            <View style={{flexDirection:'row', alignItems:'center',marginLeft:10,marginTop:350}}>
+            <Text style={ {...styles.text, color: theme.color ,fontSize:12, fontWeight:'light'}}>LML is an app created by students 
+           and is not sponsored or supported by LEGO® </Text>
             </View>
 
         </View>

@@ -245,7 +245,7 @@ import { Switch } from "@react-native-material/core";
         
         <Switch style={styles.switch}  onValueChange={toggleSwitch} value={liveMode} />
         <Text style={styles.switchText}>Live Mode</Text>
-
+        
         {/* this is the prediction for livemode, only fires if in live mode and if there is a prediction */}
         {legoPrediction && liveMode ? 
                   [<Text 
@@ -339,13 +339,15 @@ const styles = StyleSheet.create({
   },
   captureButton: {
     position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 50,
+    left: Dimensions.get('screen').width / 2 - 45,
     bottom: 40,
-    width: 100,
-    zIndex: 100,
-    height: 100,
+    width: 75,
+    zIndex: 75,
+    height: 75,
     backgroundColor: 'white',
-    borderRadius: 50,
+    borderRadius: 75,
+  
+    
   },
   modal: {
     flex: 1,
@@ -384,6 +386,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#dae0db',
   }
+ 
 });
 
 export default CameraScreen;
