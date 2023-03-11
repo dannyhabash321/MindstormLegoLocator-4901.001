@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
 
     locateButton: {
         position: "absolute",
-        top:"90%",
+        top:"85%",
         left: "10%",
         alignItems: 'center',
         justifyContent: 'center',
