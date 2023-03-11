@@ -99,7 +99,7 @@ export default function MainContainer(){
           
 
           <Tab.Screen options={{ headerShown: false}}name={homeName} component={HomeScreen} />
-          <Tab.Screen options={{headerShown: false}} name={cameraName} component={CameraScreen} />
+          <Tab.Screen options={{headerShown: false, unmountOnBlur: true,}} name={cameraName} component={CameraScreen} />
           <Tab.Screen options={{headerShown: false}} name={settingsName} component={SettingsScreen} />
           <Tab.Screen options={{ headerShown: false}} name={legoPartsName} component={LegoPartScreen} />
 

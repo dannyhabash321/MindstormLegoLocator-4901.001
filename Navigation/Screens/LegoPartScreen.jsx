@@ -33,7 +33,6 @@ function LegoPartScreen({ route, navigation}){
                     animationType="slide"
                     transparent={false}
                     visible={showModal}
-                    onPress = {() => alert("Cock")}
                     onRequestClose={() => {
                     alert("Modal has been closed.");
                     setModalVisible(!showModal);

@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   InformationStyle: {
     marginLeft: 'auto',
     backgroundColor: '#FFFFFF',
+    // borderWidth: 3,
     width: 40,
     height: 40,
     borderRadius: 5,
