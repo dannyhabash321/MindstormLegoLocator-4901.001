@@ -1,6 +1,5 @@
 import { StyleSheet,Modal, Text, View, ScrollView,Image, Pressable, Touchable, TouchableOpacity } from 'react-native';
 import { useState, useContext } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
 import { Divider} from 'react-native-paper';
 // import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 

@@ -1,7 +1,7 @@
 //import * as React from 'react';
 import React, { useState, useContext } from "react";
-import { StyleSheet, Text, View, ScrollView, TouchableWithoutFeedback } from 'react-native';
-import { Divider,Stack, Switch } from "@react-native-material/core";
+import { StyleSheet, Text, View} from 'react-native';
+import { Switch } from "@react-native-material/core";
 
 import { EventRegister } from 'react-native-event-listeners';
 import themeContext from "../../config/themeContext";
