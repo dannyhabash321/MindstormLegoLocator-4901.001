@@ -5,7 +5,7 @@ import { Divider} from 'react-native-paper';
 
 // for theming page: react useContext and below
 import themeContext from '../../config/themeContext';
-
+import * as Speech from 'expo-speech';
 function LegoPartScreen({ route, navigation}){
     //params passed from homepage
     const partId = route.params.item.PartID;
@@ -22,7 +22,28 @@ function LegoPartScreen({ route, navigation}){
 
     // theme
     const theme = useContext(themeContext);
-    
+    //Text-to-Speech Functions
+    const speakLegoNameAndID = () => {
+        const textToSay = 'LEGO piece' + legoName + ',' + 'LEGO ID' + partId;
+        Speech.speak(textToSay);
+ 
+      };
+    const speakSet = () => {
+        const textToSay = 'Set Number' + legoSet;
+        Speech.speak(textToSay);
+      };
+    const speakColor = () => {
+        const textToSay = 'Color' + legoColor;
+        Speech.speak(textToSay);
+      };
+    const speakQuantity = () => {
+        const textToSay = 'Quantity' + legoQuantity;
+        Speech.speak(textToSay);
+      };
+    const speakCategory = () => {
+        const textToSay = 'Category' + legoCategory;
+        Speech.speak(textToSay);
+      };
     //page html
     return(
 
@@ -57,7 +78,7 @@ function LegoPartScreen({ route, navigation}){
             </Pressable>
 
             <View style={styles.partContainer}>
-                <Text style={{...styles.title}}>{legoName} #{partId}</Text>
+                <Text style={{...styles.title}}onPress={speakLegoNameAndID}>{legoName} #{partId}</Text>
                 
                 <TouchableOpacity onPress = {() => setShowModal(true)}>
                     <Image style={styles.image}
@@ -71,13 +92,13 @@ function LegoPartScreen({ route, navigation}){
             </View>
             
             <View style={{padding: 15}}>
-                <Text style={{...styles.infoText, color: theme.color}}>{'Set #: ' + legoSet} </Text>
+                <Text style={{...styles.infoText, color: theme.color}} onPress={speakSet}>{'Set #: ' + legoSet} </Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={{...styles.infoText, color: theme.color}}>{'Color: ' + legoColor}</Text>
+                <Text style={{...styles.infoText, color: theme.color}}onPress={speakColor}>{'Color: ' + legoColor}</Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={{...styles.infoText, color: theme.color}}>{'Quantity: ' + legoQuantity}</Text>
+                <Text style={{...styles.infoText, color: theme.color}}onPress={speakQuantity}>{'Quantity: ' + legoQuantity}</Text>
                 <Divider style={{height: 1.5}}/>
-                <Text style={{...styles.infoText, color: theme.color}}>{'Category: ' + legoCategory}</Text>
+                <Text style={{...styles.infoText, color: theme.color}}onPress={speakCategory}>{'Category: ' + legoCategory}</Text>
                 {/* <Divider style={{height: 1.5}}/>
                 <Text style={{...styles.infoText, color: theme.color}}>{'Set Count: ' + legoSetCount}</Text> */}
             </View>
