@@ -8,7 +8,11 @@ import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 import {bundleResourceIO } from '@tensorflow/tfjs-react-native';
 import { Switch } from "@react-native-material/core";
 
-  //tensor flow initializations
+
+import * as Speech from 'expo-speech';
+ 
+
+//tensor flow initializations
   const initialiseTensorflow = async () => {
     await tf.ready();
     tf.getBackend(); 
@@ -60,6 +64,24 @@ import { Switch } from "@react-native-material/core";
     };
     // lego database
     const legos = require('../../assets/database.json')
+    
+    //speech function
+    const speakPrediction = () => {
+      const textToSay = 'LEGO piece Predicted' + legoPrediction[0].PartName;
+      Speech.speak(textToSay);
+
+    };
+  // const speakDismiss = () => {
+  //     const textToSay = 'Dismiss';
+  //     Speech.speak(textToSay);
+  //   };
+  
+
+
+
+
+
+
 
     useEffect(() => {
         (async () => {
@@ -210,7 +232,7 @@ import { Switch } from "@react-native-material/core";
               {/* if theres a prediction ready, it is displayed to user, else it is just the loading screen */}
               {legoPrediction ? 
                 [
-                  <Text key= {0} style={{ fontSize: 30, color:"black", fontWeight:'bold'}}> {"Prediction: " + legoPrediction[1] + "%"}</Text>,
+                  <Text key= {0} style={{ fontSize: 30, color:"black", fontWeight:'bold'}}onPress={speakPrediction}> {"Prediction: " + legoPrediction[1] + "%"}</Text>,
                   <Image
                   key = {1}
                   style={{ width: '50%', height: "50%", resizeMode: 'contain' }}
@@ -224,6 +246,8 @@ import { Switch } from "@react-native-material/core";
                       navigation.navigate('Lego',{ item:legoPrediction[0]})
                       setShowPrediction(false)
                       setLegoPrediction(null)
+                      
+                      
                     }}>
                     <Text>Go To Part Page</Text>
                   </Pressable> 
@@ -309,6 +333,10 @@ import { Switch } from "@react-native-material/core";
       </View>
     );
   };
+
+
+
+
 
 //css themes for UI
 const styles = StyleSheet.create({

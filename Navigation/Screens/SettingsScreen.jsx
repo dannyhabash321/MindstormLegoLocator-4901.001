@@ -42,6 +42,8 @@ function SettingsScreen({navigation}){
             
             
             <View style={{flexDirection:'row', alignItems:'center',marginLeft:10,marginTop:350}}>
+            
+            
             <Text style={ {...styles.text, color: theme.color ,fontSize:12, fontWeight:'light'}}>LML is an app created by students 
            and is not sponsored or supported by LEGO® </Text>
             </View>

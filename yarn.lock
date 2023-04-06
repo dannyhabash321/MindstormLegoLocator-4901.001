@@ -5157,6 +5157,11 @@
   "resolved" "https://registry.npmjs.org/expo-sharing/-/expo-sharing-10.3.0.tgz"
   "version" "10.3.0"
 
+"expo-speech@~10.3.0":
+  "integrity" "sha512-/DCSga6fmDAzMoTwGiAkexCFjCjnxfQQU2gNY+NEI74n8b8pZiBckgsEhA1WzGuPYWy56u2xoRvbzmLGWSraMw=="
+  "resolved" "https://registry.npmjs.org/expo-speech/-/expo-speech-10.3.0.tgz"
+  "version" "10.3.0"
+
 "expo-status-bar@~1.4.0":
   "integrity" "sha512-ZWjO6D4ARGYfAd3SWDD3STNudHDhyBZDZjhhseqoEmsf7bS9ykny8KKOhlzJW24qIQNPhkgdvHhaw9fQwMJy3Q=="
   "resolved" "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.4.2.tgz"
