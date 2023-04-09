@@ -36,10 +36,14 @@ function SettingsScreen({navigation}){
             <Text style={ {...styles.text, color: theme.color}}>Dark Mode</Text>
             </View>
             <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:10}}>
-            <Switch value={enabled} onValueChange={() => setEnabled(!enabled)} onPress={() => setEnabled(!enabled)}/>
-            <Text style={ {...styles.text, color: theme.color}}>Enable Accessibility Features</Text>
             </View>
-            
+
+            <Text style={{marginTop:100, marginLeft:30,fontSize:32, fontWeight:'bold', color: theme.color}}>Accessibility Settings</Text>
+            <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:10}}>
+            <Switch value={!enabled} onValueChange={() => setEnabled(!enabled)} onPress={() => setEnabled(!enabled)}/>
+            <Text style={ {...styles.text, color: theme.color}}>Text To Speech</Text>
+            </View>
+
             
             <View style={{flexDirection:'row', alignItems:'center',marginLeft:10,marginTop:350}}>
             
