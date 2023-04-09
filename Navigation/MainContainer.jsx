@@ -18,7 +18,6 @@ import { useState, useContext } from 'react';
 import { useEffect } from 'react';
 
 //Screen Names
-// const homeStackName = 'HomeStack'
 const homeName = "Home"
 const cameraName = "Camera";
 const settingsName = "Settings";
@@ -29,9 +28,6 @@ const Tab = createBottomTabNavigator();
 
 export default function MainContainer(){
     const [mode, setMode] = useState(false);
-
-    // // theme
-    // const theme = useContext(themeContext);
 
 
     useEffect(() => {

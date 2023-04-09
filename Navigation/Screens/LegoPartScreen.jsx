@@ -99,8 +99,6 @@ function LegoPartScreen({ route, navigation}){
                 <Text style={{...styles.infoText, color: theme.color}}onPress={speakQuantity}>{'Quantity: ' + legoQuantity}</Text>
                 <Divider style={{height: 1.5}}/>
                 <Text style={{...styles.infoText, color: theme.color}}onPress={speakCategory}>{'Category: ' + legoCategory}</Text>
-                {/* <Divider style={{height: 1.5}}/>
-                <Text style={{...styles.infoText, color: theme.color}}>{'Set Count: ' + legoSetCount}</Text> */}
             </View>
 
             <Pressable style={styles.locateButton} onPress={() => navigation.navigate('Camera')}>

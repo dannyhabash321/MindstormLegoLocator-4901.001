@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { SearchBar, ListItem, Avatar } from "@rneui/themed";
 import { Divider } from "@react-native-material/core";
 import React, { useState, useContext } from "react";
-// import {  } from "@react-native-material/core"; //List items from https://www.react-native-material.com/docs/components/list-item
 import InformationModal from '../../components/Information';
 // for theming page: react useContext and below
 import themeContext from '../../config/themeContext';
@@ -44,7 +43,6 @@ function HomeScreen({navigation}){
   });
 
  return(
-    // <View style={{backgroundColor: theme.theme == "dark" ? "#0f2b45" : "gray"}}>
     <View style={{backgroundColor: theme.background}}>
     <InformationModal></InformationModal> 
       <ScrollView style={{position:'relative',top:40,marginBottom:90, backgroundColor: theme.background}}>
@@ -55,16 +53,6 @@ function HomeScreen({navigation}){
       {/* iterate over the json file and print one by one */}
       
       {results.map(item => (
-          // <ListItem  key = {item.PartID} onPress={() => navigation.navigate('Lego',{ item:item})}#1b314b
-          //   leadingMode="avatar"
-          //   leading={                                                                                      #0f2b45
-          //   <Avatar image={{ uri: item.ImageURL }} />
-          // }
-          //   title= {item.PartName}
-          //   secondaryText={'Category: ' + item.Category}
-            
-          // />
-          
           <ListItem key = {item.PartID} onPress={() => navigation.navigate('Lego',{ item:item})} containerStyle={{backgroundColor: theme.theme == "dark" ? "#000000" : theme.background}} bottomDivider>
           <Avatar size={70} source={{ uri: item.ImageURL }} />
           <ListItem.Content>
