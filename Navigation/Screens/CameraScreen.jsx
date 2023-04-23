@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Image,View,StyleSheet,Dimensions,Pressable,Modal,Text,ActivityIndicator,} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {Image,View,StyleSheet,Dimensions,Pressable,Modal,Text,ActivityIndicator, TouchableWithoutFeedback,} from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
 import {startPrediction} from '../../helpers/tensor-helper';
 import {Camera} from 'expo-camera';
@@ -7,10 +7,12 @@ import * as tf from "@tensorflow/tfjs";
 import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 import {bundleResourceIO } from '@tensorflow/tfjs-react-native';
 import { Switch } from "@react-native-material/core";
-
-
+import * as ImageManipulator from 'expo-image-manipulator';
 import * as Speech from 'expo-speech';
+
  
+
+
 
 //tensor flow initializations
   const initialiseTensorflow = async () => {
@@ -28,6 +30,7 @@ import * as Speech from 'expo-speech';
   
   //camera screen function with navigation as argument
   function CameraScreen({navigation}){
+    
     const textureDims = Platform.OS === 'ios' ?
   {
     height: 1920,
@@ -41,7 +44,7 @@ import * as Speech from 'expo-speech';
     //camera permissions
     const [hasCameraPermission, setHasCameraPermission] = useState();
     const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
-    
+  
     //unused maybe useful variables
     // const [isProcessing, setIsProcessing] = useState(false);
 
@@ -53,8 +56,10 @@ import * as Speech from 'expo-speech';
     //holds pretrained model
     const [model, setModel] = useState()
     //prediction state to show prediction modal
-    const [showPrediction, setShowPrediction] = useState(false) 
-    
+    const [showPrediction, setShowPrediction] = useState(false)
+
+    const [loading, setLoading] = useState(false)
+
     //livemode state
     const [liveMode, setLiveMode] = useState(false)
     //livemode toggle switch, sets prediction to null so that live predictions dont interfere with capture predictions
@@ -93,7 +98,6 @@ import * as Speech from 'expo-speech';
           //initializes tensorflow and loads the model as soon as camera page is loaded
           await initialiseTensorflow();
           setModel(await tf.loadLayersModel(bundleResourceIO(modelJson, modelWeights)));
-          
         })();
       }, []);
 
@@ -132,7 +136,6 @@ import * as Speech from 'expo-speech';
                             setLegoPrediction([legos[i], Number(100*prediction[highestPrediction]).toFixed(1) ])
                           }
                         }
-                        console.log(RESULT_MAPPING[highestPrediction])
                         tf.dispose([normalized]);
                       }
                     }
@@ -178,9 +181,11 @@ import * as Speech from 'expo-speech';
     // };
 
       
-
+    
   //picture capture prediction, this function grabs a tensor of every frame and sets it to the tensor state to be used for prediction if the user clicks capture
   //very ineffecient, if image can be converted to tensor then solution might be a lot faster
+ 
+ 
   const handleTensorCapture = async (images: IterableIterator<tf.Tensor3D>) => {
     const loop = async () => { 
       setTensorImage(images.next().value)
@@ -189,8 +194,12 @@ import * as Speech from 'expo-speech';
     }
     loop();
   }
+
+
   //when user clicks capture image button, this function fires using the tensor state frm previous function and predicting based on that
     const handleImageCapture = async () => {
+  
+      setLoading(true)
       //prediction preperations
       try{
         const imageData2 = tf.image.resizeBilinear(tensorImage,[224,224])   
@@ -215,12 +224,12 @@ import * as Speech from 'expo-speech';
           
       }
       catch (e){
-        console.log("error2")
-        return 1
+        console.log(e)
+        
+        
       }
+      setLoading(false)
     };
-
-
 
 
     return (
@@ -259,32 +268,35 @@ import * as Speech from 'expo-speech';
                 style={styles.dismissButton}
                 onPress={() => {
                   setShowPrediction(false)
-                  setLegoPrediction(null)
+                  // setLegoPrediction(null)
                 }}>
                 <Text>Dismiss</Text>
               </Pressable>
             </View>
           </View>
         </Modal>
+
         
         <Switch style={styles.switch}  onValueChange={toggleSwitch} value={liveMode} />
         <Text style={styles.switchText}>Live Mode</Text>
         
         {/* this is the prediction for livemode, only fires if in live mode and if there is a prediction */}
         {legoPrediction && liveMode ? 
-                  [<Text 
-                    key = {1} 
-                    style={{ fontSize: 30,zIndex: 100, top: 50, color:"white", fontWeight:'bold', position: "absolute",}}>
+                  [<Pressable key = {1} style={{zIndex: 100}} onPress= {()=> setShowPrediction(true)}>
+                    <Text 
+                      style={{ fontSize: 30,zIndex: 100, top: 50, color:"white", fontWeight:'bold', position: "absolute",}}>
                     {"Prediction: " + legoPrediction[1] + "%"}
-                  </Text>,
+                    </Text>
+                  </Pressable>,
+                  <TouchableWithoutFeedback key = {2} style={{zIndex: 100}} onPress= {()=> setShowPrediction(true)}>
                   <Image
-                    key = {2}
                     style={{ width: '15%', height: "15%", resizeMode: 'contain',position: "absolute",zIndex: 100,top: 70, left: 45 }}
                     source={{ uri: legoPrediction[0].ImageURL }}
                   />
+                  </TouchableWithoutFeedback>,
                   ] :
                   null
-                }
+          }
 
         {/* works but ram heavy  */}
         {/* livemode check, different components fire depending whether user in live or picture mode, capture button disappears from livemode */}
@@ -308,6 +320,7 @@ import * as Speech from 'expo-speech';
                 style={styles.camera}
                 type={Camera.Constants.Type.back}
                 onReady={(tensors)=>handleTensorCapture(tensors)}
+                // onReady={()=>console.log("yes")}
                 resizeHeight={224}
                 resizeWidth={224}
                 resizeDepth={3}
@@ -315,21 +328,25 @@ import * as Speech from 'expo-speech';
                 cameraTextureHeight={1920}
                 cameraTextureWidth={1080}
               />,
+              model?
               <Pressable
                 key={2}
                 onPress={() => handleImageCapture()}
-                style={styles.captureButton}>
-              </Pressable>
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed
+                      ? 'grey'
+                      : 'white'
+                  },
+                  styles.captureButton
+                ]}>
+              </Pressable> : <ActivityIndicator key={3} animating= {true}  style={[styles.captureButton]} size="large" />
+              
+              // <ActivityIndicator animating= {loading} hidesWhenStopped = {!loading} style={{backgroundColor: "transparent"}} key= {3} size="large" />
             ]
           }
         
-        {/* <Camera
-          ref={cameraRef}
-          style={styles.camera}
-          type={Camera.Constants.Type.back}
-          autoFocus={true}
-          whiteBalance={Camera.Constants.WhiteBalance.auto}></Camera>
-        */}
+       
       </View>
     );
   };
@@ -341,10 +358,11 @@ import * as Speech from 'expo-speech';
 //css themes for UI
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     width: '100%',
     height: '100%',
   },
+
   switch:{
     position: "absolute",
     left: Dimensions.get('screen').width - 70,
@@ -372,7 +390,6 @@ const styles = StyleSheet.create({
     width: 75,
     zIndex: 75,
     height: 75,
-    backgroundColor: 'white',
     borderRadius: 75,
   
     
