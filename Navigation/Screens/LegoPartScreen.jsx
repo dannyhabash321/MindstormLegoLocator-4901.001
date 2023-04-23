@@ -91,7 +91,7 @@ function LegoPartScreen({ route, navigation}){
                 
             </View>
             
-            <View style={{padding: 15}}>
+            <ScrollView style={{padding: 15}}>
                 <Text style={{...styles.infoText, color: theme.color}} onPress={speakSet}>{'Set #: ' + legoSet} </Text>
                 <Divider style={{height: 1.5}}/>
                 <Text style={{...styles.infoText, color: theme.color}}onPress={speakColor}>{'Color: ' + legoColor}</Text>
@@ -99,9 +99,9 @@ function LegoPartScreen({ route, navigation}){
                 <Text style={{...styles.infoText, color: theme.color}}onPress={speakQuantity}>{'Quantity: ' + legoQuantity}</Text>
                 <Divider style={{height: 1.5}}/>
                 <Text style={{...styles.infoText, color: theme.color}}onPress={speakCategory}>{'Category: ' + legoCategory}</Text>
-            </View>
+            </ScrollView>
 
-            <Pressable style={styles.locateButton} onPress={() => navigation.navigate('Camera')}>
+            <Pressable style={styles.locateButton} onPress={()=>navigation.navigate('Locate', { partId: partId})}>
                 <Text style={styles.locateText}>Locate</Text>
             </Pressable>
 
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         top: "3%",
         left: "5%",
         width: '90%',
-        height: '80%',
+        height: '75%',
         resizeMode: 'contain',
         objectfit: "contain"
     },

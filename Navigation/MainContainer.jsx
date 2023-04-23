@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {  Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, CommonActions  } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Feather from 'react-native-vector-icons/Feather'; // Icon from https://github.com/oblador/react-native-vector-icons
 import EvilIcons from 'react-native-vector-icons/EvilIcons';// Icon from https://github.com/oblador/react-native-vector-icons
 import Entypo from 'react-native-vector-icons/Entypo'; //Icon from https://github.com/oblador/react-native-vector-icons
+import IonIcon from 'react-native-vector-icons/Ionicons';
 import { EventRegister } from 'react-native-event-listeners';
 import themeContext from '../config/themeContext';
 import theme from '../config/theme';
@@ -12,6 +13,7 @@ import theme from '../config/theme';
 //Screens
 import HomeScreen from './Screens/HomeScreen'
 import CameraScreen from './Screens/CameraScreen'
+import LocateScreen from './Screens/LocateScreen'
 import SettingsScreen from './Screens/SettingsScreen'
 import LegoPartScreen from './Screens/LegoPartScreen';
 import { useState, useContext } from 'react';
@@ -19,6 +21,7 @@ import { useEffect } from 'react';
 
 //Screen Names
 const homeName = "Home"
+const locateName = "Locate"
 const cameraName = "Camera";
 const settingsName = "Settings";
 const legoPartsName = "Lego"
@@ -38,6 +41,8 @@ export default function MainContainer(){
         EventRegister.removeEventListener(eventListener);
       };
     });
+
+  
 
     return(
 
@@ -74,7 +79,7 @@ export default function MainContainer(){
                 return (
                     <View>
                         <EvilIcons name="camera" size={50} color={outlined} backgroundColor={"#ffffff"} />
-                        <Text style={{color:outlined, fontSize:20,position:'relative',left:-10,bottom:-3,textAlign:'center'}}>Camera</Text>
+                        <Text style={{color:outlined, fontSize:20,position:'relative',left:-10,bottom:-3,textAlign:'center'}}>Identify</Text>
                     </View>
                 )
   
@@ -87,6 +92,15 @@ export default function MainContainer(){
                         <Text style={{color:outlined, fontSize:20,position:'relative',left:-5,bottom:-3,textAlign:'center'}}>Menu</Text>
                     </View>
                 )
+              }
+              else if (rn === locateName) {
+                outlined = focused ? '#ff0000' : '#808080';
+                return (
+                    <View>
+                        <IonIcon name="locate" size={45} color={outlined} backgroundColor={"#ffffff"} />
+                        <Text style={{color:outlined, fontSize:20,position:'relative',left:-5,bottom:-3,textAlign:'center'}}>Locate</Text>
+                    </View>
+                )
               } 
             },
           })}>
@@ -94,6 +108,7 @@ export default function MainContainer(){
 
           <Tab.Screen options={{ headerShown: false}}name={homeName} component={HomeScreen} />
           <Tab.Screen options={{headerShown: false, unmountOnBlur: true,}} name={cameraName} component={CameraScreen} />
+          <Tab.Screen options={{headerShown: false, unmountOnBlur: true,}} name={locateName} component={LocateScreen} />
           <Tab.Screen options={{headerShown: false}} name={settingsName} component={SettingsScreen} />
           <Tab.Screen options={{ headerShown: false}} name={legoPartsName} component={LegoPartScreen} />
 

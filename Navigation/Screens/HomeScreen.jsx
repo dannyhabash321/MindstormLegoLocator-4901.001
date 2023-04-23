@@ -10,7 +10,6 @@ import themeContext from '../../config/themeContext';
 
 
 function HomeScreen({navigation}){
-
   // theme
   const theme = useContext(themeContext);
 
