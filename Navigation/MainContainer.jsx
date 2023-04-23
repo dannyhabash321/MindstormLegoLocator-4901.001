@@ -9,6 +9,8 @@ import { EventRegister } from 'react-native-event-listeners';
 import themeContext from '../config/themeContext';
 import theme from '../config/theme';
 
+import ttsContext from "../config/ttsContext";
+
 //Screens
 import HomeScreen from './Screens/HomeScreen'
 import CameraScreen from './Screens/CameraScreen'
@@ -27,12 +29,21 @@ const Tab = createBottomTabNavigator();
 
 
 export default function MainContainer(){
-    const [mode, setMode] = useState(false);
-
+    const [themeMode, setThemeMode] = useState(false);
+    const [ttsMode, setTtsMode] = useState(false);
 
     useEffect(() => {
       let eventListener = EventRegister.addEventListener("changeTheme", (data) => {
-        setMode(data);
+        setThemeMode(data);
+      });
+      return() => {
+        EventRegister.removeEventListener(eventListener);
+      };
+    })
+  
+    useEffect(() => {
+      let eventListener = EventRegister.addEventListener("changeTts", (data) => {
+        setTtsMode(data);
       });
       return() => {
         EventRegister.removeEventListener(eventListener);
@@ -41,7 +52,8 @@ export default function MainContainer(){
 
     return(
 
-        <themeContext.Provider value = {mode === true ? theme.dark : theme.light} >
+        <ttsContext.Provider value = {ttsMode === true ? theme.dark : theme.light}>
+        <themeContext.Provider value = {themeMode === true ? theme.dark : theme.light}>
         <NavigationContainer >
         <Tab.Navigator 
           initialRouteName={homeName}
@@ -55,7 +67,7 @@ export default function MainContainer(){
               : undefined,
 
             tabBarShowLabel: false,
-            tabBarStyle: { height: 130, backgroundColor: mode === true ? "#1a1a1a" : "white" },
+            tabBarStyle: { height: 130, backgroundColor: themeMode === true ? "#1a1a1a" : "white" },
             tabBarIcon: ({ focused}) => {
               let outlined;
               let rn = route.name;
@@ -100,6 +112,7 @@ export default function MainContainer(){
         </Tab.Navigator>
       </NavigationContainer>
       </themeContext.Provider>
+      </ttsContext.Provider>
     );
 
 }
