@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Image,View,StyleSheet,Dimensions,Pressable,Modal,Text,ActivityIndicator} from 'react-native';
+import {Image,View,StyleSheet,Dimensions,Pressable,Modal,Text,ActivityIndicator, Vibration} from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
 import {AutoFocus, Camera} from 'expo-camera';
 import axios from 'axios';
@@ -95,14 +95,20 @@ import { useFocusEffect } from '@react-navigation/native';
         
             })
             .then(function(response) {
-              let res = response.data.predictions
+              let res = []
               try{
                 if (route.params.partId){
-                  for(var i = 0; i < response.data.predictions.length; i++ ){
-                    if(response.data.predictions[i].class == route.params.partId){
-                      res = [response.data.predictions[i]]
-                    }
+                  // console.log("ran")
+
+                    for(var i = 0; i < response.data.predictions.length; i++ ){
+                      if(response.data.predictions[i].class === route.params.partId){
+                        res = [response.data.predictions[i]];
+                        setPartLocation(true)
+                        Vibration.vibrate();
+                      }
                   }
+                }else{
+                  res = response.data.predictions
                 }
               }
               catch(e){
@@ -144,6 +150,8 @@ import { useFocusEffect } from '@react-navigation/native';
     const [showPrediction, setShowPrediction] = useState(false) 
 
     const [legoLocations, setLegoLocations] = useState([])
+
+    const [partLocation, setPartLocation] = useState(false)
     
   
     const legos = require('../../assets/database.json')
@@ -234,11 +242,9 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
       <Camera style={styles.container} ref={cameraRef} onCameraReady={()=>takePic()}/>
-
-      <View style={styles.box}></View>
-
+      
       {legoLocations.map((prediction, index) => (
-        
+        [
         <View  key = {index} onStartShouldSetResponder={() => { {
           for (var i = 0; i < legos.length; i++){
             if (legos[i].PartID === prediction.class){
@@ -260,7 +266,18 @@ import { useFocusEffect } from '@react-navigation/native';
           >
             
             <Text style ={styles.predictionClass}>{prediction.class} ({prediction.confidence.toFixed(2) * 100}%)</Text>
-          </View>
+          </View>,
+          
+        
+          partLocation && 
+            <View key = {index+1} style={{zIndex: 100}}>
+              <Text style={styles.partLocation}>Part Located!</Text>
+                <Text style={styles.partLocationW}>Width:{((Dimensions.get('window').width/400) * prediction.width).toFixed(0)}</Text>
+                <Text style={styles.partLocationH}>Height:{(((Dimensions.get('window').height-130)/512)* prediction.height).toFixed(0)}</Text>
+                <Text style={styles.partLocationX}>X:{(((prediction.y/512) * (Dimensions.get('window').height-130)) - (((Dimensions.get('window').height-130)/512)* prediction.height/2)).toFixed(0)}</Text>
+                <Text style={styles.partLocationY}>Y:{(((prediction.x / 400) * Dimensions.get('window').width) -  ((Dimensions.get('window').width/400) * prediction.width/2)).toFixed(0)}</Text>
+            </View>]
+          
         
       ))}
        
@@ -278,6 +295,56 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: '100%',
     height: '100%',
+  },
+  partLocation:{
+    position: 'absolute',
+    left: Dimensions.get('screen').width / 2 - 85,
+    bottom: 70,
+    color: "#ff0000",
+    opacity: .8,
+    zIndex: 75,
+    height: 75,
+    fontSize: 30,
+  },
+  partLocationW:{
+    position: 'absolute',
+    left: Dimensions.get('screen').width / 2 - 35,
+    opacity: .7,
+    bottom: 35,
+    color: "#ff0000",
+    zIndex: 75,
+    height: 75,
+    fontSize: 15,
+  },
+  partLocationH:{
+    position: 'absolute',
+    left: Dimensions.get('screen').width / 2 - 35,
+    bottom: 20,
+    opacity: .7,
+    color: "#ff0000",
+    zIndex: 75,
+    height: 75,
+    fontSize: 15,
+  },
+  partLocationX:{
+    position: 'absolute',
+    left: Dimensions.get('screen').width / 2 - 35,
+    bottom: 0,
+    opacity: .7,
+    color: "#ff0000",
+    zIndex: 75,
+    height: 75,
+    fontSize: 15,
+  },
+  partLocationY:{
+    position: 'absolute',
+    left: Dimensions.get('screen').width / 2 - 35,
+    bottom: -15,
+    color: "#ff0000",
+    zIndex: 75,
+    height: 75,
+    opacity: .7,
+    fontSize: 15,
   },
 
   camera: {
@@ -336,10 +403,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     color: '#ff0000',
     top: -20,
-    flex: 1,
-    flexDirection: "row",
-    
-    
+    width: 1000,
   }
  
 });
