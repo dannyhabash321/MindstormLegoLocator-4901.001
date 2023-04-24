@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Image,View,StyleSheet,Dimensions,Pressable,Modal,Text,ActivityIndicator} from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
-import {Camera} from 'expo-camera';
+import {AutoFocus, Camera} from 'expo-camera';
 import axios from 'axios';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { useFocusEffect } from '@react-navigation/native';
@@ -173,7 +173,7 @@ import { useFocusEffect } from '@react-navigation/native';
           const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
           setHasCameraPermission(cameraPermission.status === "granted");
           setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
-
+          
 
         })();
       }, []);

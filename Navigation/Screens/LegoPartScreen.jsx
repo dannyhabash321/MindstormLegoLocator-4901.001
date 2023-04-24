@@ -23,27 +23,38 @@ function LegoPartScreen({ route, navigation}){
 
     // theme
     const theme = useContext(themeContext);
+    const tts = useContext(ttsContext);
     //Text-to-Speech Functions
     const speakLegoNameAndID = () => {
         const textToSay = 'LEGO piece' + legoName + ',' + 'LEGO ID' + partId;
-        Speech.speak(textToSay);
-
+        console.log(tts.ttsChoice)
+        if (tts.ttsChoice == "true") {
+            Speech.speak(textToSay);
+        }
     };
     const speakSet = () => {
         const textToSay = 'Set Number' + legoSet;
-        Speech.speak(textToSay);
+        if (tts.ttsChoice == "true") {
+            Speech.speak(textToSay);
+        }
     };
     const speakColor = () => {
         const textToSay = 'Color' + legoColor;
-        Speech.speak(textToSay);
+        if (tts.ttsChoice == "true") {
+            Speech.speak(textToSay);
+        }
     };
     const speakQuantity = () => {
         const textToSay = 'Quantity' + legoQuantity;
-        Speech.speak(textToSay);
+        if (tts.ttsChoice == "true") {
+            Speech.speak(textToSay);
+        }
     };
     const speakCategory = () => {
         const textToSay = 'Category' + legoCategory;
-        Speech.speak(textToSay);
+        if (tts.ttsChoice == "true") {
+            Speech.speak(textToSay);
+        }
     };
     //page html
     return(

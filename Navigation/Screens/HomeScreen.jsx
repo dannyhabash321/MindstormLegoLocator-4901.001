@@ -6,6 +6,7 @@ import React, { useState, useContext } from "react";
 import InformationModal from '../../components/Information';
 // for theming page: react useContext and below
 import themeContext from '../../config/themeContext';
+import Feather from 'react-native-vector-icons/Feather'; // Icon from https://github.com/oblador/react-native-vector-icons
 
 
 
@@ -43,8 +44,16 @@ function HomeScreen({navigation}){
 
  return(
     <View style={{backgroundColor: theme.background}}>
-    <InformationModal></InformationModal> 
+    
+    
+    {/* <Text style={{fontSize:20,position:'absolute',left:-5,bottom:-3,textAlign:'center'}}>Menu</Text> */}
+    
+    <InformationModal></InformationModal>
+      <Feather style={{ marginTop: 0, position:'relative', marginLeft: 18 }} name="menu" size={35} backgroundColor={"#ffffff"} 
+      onPress={() => navigation.navigate('Settings')}
+      />
       <ScrollView style={{position:'relative',top:40,marginBottom:90, backgroundColor: theme.background}}>
+
       <Text style={{...styles.text, left:20,fontWeight:'bold', fontSize:30, color: theme.color}}>Lego Pieces</Text>
       <Text style={{...styles.text, color: theme.color}}>Please select the piece you would like to identify</Text>
       <SearchBar onChangeText={updateSearch} value={searchTerm} placeholder="Search" platform="ios" containerStyle={{position:'relative',margin:16, backgroundColor: theme.background}}/>

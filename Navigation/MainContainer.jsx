@@ -11,6 +11,7 @@ import themeContext from '../config/themeContext';
 import theme from '../config/theme';
 
 import ttsContext from "../config/ttsContext";
+import tts from '../config/tts';
 
 //Screens
 import HomeScreen from './Screens/HomeScreen'
@@ -57,7 +58,7 @@ export default function MainContainer(){
 
     return(
 
-        <ttsContext.Provider value = {ttsMode === true ? theme.dark : theme.light}>
+        <ttsContext.Provider value = {ttsMode === true ? tts.true : tts.false}>
         <themeContext.Provider value = {themeMode === true ? theme.dark : theme.light}>
         <NavigationContainer >
         <Tab.Navigator 
@@ -65,6 +66,7 @@ export default function MainContainer(){
           screenOptions={({ route }) => ({
             tabBarButton: [
               legoPartsName,
+              settingsName,
             ].includes(route.name)
               ? () => {
                   return null;

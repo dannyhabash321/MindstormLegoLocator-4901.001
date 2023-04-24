@@ -1,6 +1,6 @@
 //import * as React from 'react';
 import React, { useState, useContext } from "react";
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View, Pressable} from 'react-native';
 import { Switch } from "@react-native-material/core";
 
 import { EventRegister } from 'react-native-event-listeners';
@@ -23,7 +23,9 @@ function SettingsScreen({navigation}){
 
     return(
         <View style={[styles.container, {backgroundColor: theme.background}]}>
-
+            <Pressable onPress={() => navigation.goBack()} name="left" style={{...styles.backButton, backgroundColor: theme.theme == "dark" ? "#282C34" : theme.background}} size="30"> 
+                <Text style={{fontSize: 25, color:"#ff0000", left: 5 }}> {'<'} Home</Text>
+            </Pressable>
             <Text style={{marginTop:100, marginLeft:30,fontSize:32, fontWeight:'bold', color: theme.color}}>Settings</Text>
             <View style={{flexDirection:'row', alignItems:'center',marginLeft:30,marginTop:50}}>
             <Switch value={themeMode} onValueChange={(value) => {
@@ -86,6 +88,9 @@ const styles = StyleSheet.create({
     text:{
       marginLeft:10,
       fontSize:20,
-    }
+    },
+    backButton: {
+      marginTop:50  
+    },
   });
 export default SettingsScreen
