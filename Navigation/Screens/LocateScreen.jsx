@@ -270,12 +270,12 @@ import { useFocusEffect } from '@react-navigation/native';
           
         
           partLocation && 
-            <View key = {index+1} style={{zIndex: 100}}>
-              <Text style={styles.partLocation}>Part Located!</Text>
-                <Text style={styles.partLocationW}>Width:{((Dimensions.get('window').width/400) * prediction.width).toFixed(0)}</Text>
-                <Text style={styles.partLocationH}>Height:{(((Dimensions.get('window').height-130)/512)* prediction.height).toFixed(0)}</Text>
-                <Text style={styles.partLocationX}>X:{(((prediction.y/512) * (Dimensions.get('window').height-130)) - (((Dimensions.get('window').height-130)/512)* prediction.height/2)).toFixed(0)}</Text>
-                <Text style={styles.partLocationY}>Y:{(((prediction.x / 400) * Dimensions.get('window').width) -  ((Dimensions.get('window').width/400) * prediction.width/2)).toFixed(0)}</Text>
+            <View key = {index+1} style={ styles.partLocationContainer}>
+                <Text style={ [{fontSize: 30,left: '6%',color: "#ff0000",}]}>Part Located!</Text>
+                <Text style={ styles.partLocationText}>Width:{((Dimensions.get('window').width/400) * prediction.width).toFixed(0)}</Text>
+                <Text style={ styles.partLocationText}>Height:{(((Dimensions.get('window').height-130)/512)* prediction.height).toFixed(0)}</Text>
+                <Text style={ styles.partLocationText}>X:{(((prediction.y/512) * (Dimensions.get('window').height-130)) - (((Dimensions.get('window').height-130)/512)* prediction.height/2)).toFixed(0)}</Text>
+                <Text style={ styles.partLocationText}>Y:{(((prediction.x / 400) * Dimensions.get('window').width) -  ((Dimensions.get('window').width/400) * prediction.width/2)).toFixed(0)}</Text>
             </View>]
           
         
@@ -296,55 +296,23 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  partLocation:{
+  partLocationContainer:{
     position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 85,
-    bottom: 70,
-    color: "#ff0000",
-    opacity: .8,
-    zIndex: 75,
-    height: 75,
-    fontSize: 30,
+    left: Dimensions.get('screen').width / 2 - 90,
+    bottom: 30,
+    backgroundColor: "white",
+    opacity: .5,
+    zIndex: 100,
+    height: 120,
+    borderRadius: 10,
+    width: 185,
+
+    // justifyContent: 'center',
+    margin: 'auto',
   },
-  partLocationW:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    opacity: .7,
-    bottom: 35,
+  partLocationText:{
+    left: '30%',
     color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    fontSize: 15,
-  },
-  partLocationH:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    bottom: 20,
-    opacity: .7,
-    color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    fontSize: 15,
-  },
-  partLocationX:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    bottom: 0,
-    opacity: .7,
-    color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    fontSize: 15,
-  },
-  partLocationY:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    bottom: -15,
-    color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    opacity: .7,
-    fontSize: 15,
   },
 
   camera: {
