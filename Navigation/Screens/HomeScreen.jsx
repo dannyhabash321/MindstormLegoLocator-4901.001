@@ -49,10 +49,10 @@ function HomeScreen({navigation}){
     {/* <Text style={{fontSize:20,position:'absolute',left:-5,bottom:-3,textAlign:'center'}}>Menu</Text> */}
     
     <InformationModal></InformationModal>
-      <Feather style={{ marginTop: 0, position:'relative', marginLeft: 18 }} name="menu" size={35} backgroundColor={"#ffffff"} 
+      <Feather style={{ marginTop: 0, position:'relative', marginLeft: 18, width: 50, height: 50, color: theme.theme == "light" ? "#000000" : "white"  }} name="settings" size={35} backgroundColor={"#ffffff"} 
       onPress={() => navigation.navigate('Settings')}
       />
-      <ScrollView style={{position:'relative',top:40,marginBottom:90, backgroundColor: theme.background}}>
+      <ScrollView style={{position:'relative', marginBottom:90, backgroundColor: theme.background}}>
 
       <Text style={{...styles.text, left:20,fontWeight:'bold', fontSize:30, color: theme.color}}>Lego Pieces</Text>
       <Text style={{...styles.text, color: theme.color}}>Please select the piece you would like to identify</Text>

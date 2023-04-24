@@ -27,7 +27,6 @@ function LegoPartScreen({ route, navigation}){
     //Text-to-Speech Functions
     const speakLegoNameAndID = () => {
         const textToSay = 'LEGO piece' + legoName + ',' + 'LEGO ID' + partId;
-        console.log(tts.ttsChoice)
         if (tts.ttsChoice == "true") {
             Speech.speak(textToSay);
         }
@@ -59,7 +58,7 @@ function LegoPartScreen({ route, navigation}){
     //page html
     return(
 
-        <View style={{...styles.container, backgroundColor: theme.theme == "dark" ? "#282C34" : theme.background}}>
+        <View style={{...styles.container, backgroundColor: theme.theme == "dark" ? "#000000" : theme.background}}>
             {/* modal not present until photo is clicked */}
             <Modal 
                     animationType="slide"
@@ -85,7 +84,7 @@ function LegoPartScreen({ route, navigation}){
             </Modal>
             
             
-            <Pressable onPress={() => navigation.goBack()} name="left" style={{...styles.backButton, backgroundColor: theme.theme == "dark" ? "#282C34" : theme.background}} size="30"> 
+            <Pressable onPress={() => navigation.goBack()} name="left" style={{...styles.backButton, backgroundColor: theme.theme == "dark" ? "#000000" : theme.background}} size="30"> 
                 <Text style={{fontSize: 25, color:"#ff0000", left: 5 }}> {'<'} Home</Text>
             </Pressable>
 
@@ -113,7 +112,7 @@ function LegoPartScreen({ route, navigation}){
                 <Text style={{...styles.infoText, color: theme.color}}onPress={speakCategory}>{'Category: ' + legoCategory}</Text>
             </ScrollView>
 
-            <Pressable style={styles.locateButton} onPress={()=>navigation.navigate('Locate', { partId: partId})}>
+            <Pressable style={[styles.locateButton, {marginTop:25}]} onPress={()=>navigation.navigate('Locate', { partId: partId})}>
                 <Text style={styles.locateText}>Locate</Text>
             </Pressable>
 

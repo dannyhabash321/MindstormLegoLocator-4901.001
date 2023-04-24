@@ -23,7 +23,7 @@ function SettingsScreen({navigation}){
 
     return(
         <View style={[styles.container, {backgroundColor: theme.background}]}>
-            <Pressable onPress={() => navigation.goBack()} name="left" style={{...styles.backButton, backgroundColor: theme.theme == "dark" ? "#282C34" : theme.background}} size="30"> 
+            <Pressable onPress={() => navigation.goBack()} name="left" style={{...styles.backButton, backgroundColor: theme.theme == "dark" ? "#000000" : theme.background}} size="30"> 
                 <Text style={{fontSize: 25, color:"#ff0000", left: 5 }}> {'<'} Home</Text>
             </Pressable>
             <Text style={{marginTop:100, marginLeft:30,fontSize:32, fontWeight:'bold', color: theme.color}}>Settings</Text>
