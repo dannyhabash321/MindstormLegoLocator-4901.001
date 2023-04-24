@@ -10,9 +10,6 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 
-  //the order of lego IDs based on trained model
-  const RESULT_MAPPING = ["370526","370626","370726","370826","373726","4121715","4140806","4142822","4142865","4153707","4153718","4162857","4177431","4177434","4198367","4206482","4211639","4211651","4211713","4211805","4211807","4211815","4211866","4495930","4499858","4502595","4509376","4513174","4514553","4522934","4535768","4539880","4540797","4541326","4542578","4543490","4552347","4565452","4566249","4566251","4582792","4585040","4611705","4640536","4652235","4666579","6007973","6008527","6012451","6028041","6031821","6035364","6083620","6114171","6133119","6173127","6178438","6178439","6178448","6185471","6195314","6227055","6227941","6239012","6261375","6261688","6265091","6268905","6271161","6271167","6271827","6271869","6273715","6275844","6276836","6276854","6276951","6278132","6279881","6280394","6282158","6284188","6284699","6288218","6296844","6310609","6313453","6313520","6321303","6321305","6321744","6325504","6326620","6327548","6331428","6331441","6346535"];
-  
   //camera screen function with navigation as argument
   function LocateScreen({route,navigation}){
     
@@ -270,12 +267,12 @@ import { useFocusEffect } from '@react-navigation/native';
           
         
           partLocation && 
-            <View key = {index+1} style={{zIndex: 100}}>
-              <Text style={styles.partLocation}>Part Located!</Text>
-                <Text style={styles.partLocationW}>Width:{((Dimensions.get('window').width/400) * prediction.width).toFixed(0)}</Text>
-                <Text style={styles.partLocationH}>Height:{(((Dimensions.get('window').height-130)/512)* prediction.height).toFixed(0)}</Text>
-                <Text style={styles.partLocationX}>X:{(((prediction.y/512) * (Dimensions.get('window').height-130)) - (((Dimensions.get('window').height-130)/512)* prediction.height/2)).toFixed(0)}</Text>
-                <Text style={styles.partLocationY}>Y:{(((prediction.x / 400) * Dimensions.get('window').width) -  ((Dimensions.get('window').width/400) * prediction.width/2)).toFixed(0)}</Text>
+            <View key = {index+1} style={ styles.partLocationContainer}>
+                <Text style={ [{fontSize: 30,left: '6%',color: "#ff0000",}]}>Part Located!</Text>
+                <Text style={ styles.partLocationText}>Width:{((Dimensions.get('window').width/400) * prediction.width).toFixed(0)}</Text>
+                <Text style={ styles.partLocationText}>Height:{(((Dimensions.get('window').height-130)/512)* prediction.height).toFixed(0)}</Text>
+                <Text style={ styles.partLocationText}>X:{(((prediction.y/512) * (Dimensions.get('window').height-130)) - (((Dimensions.get('window').height-130)/512)* prediction.height/2)).toFixed(0)}</Text>
+                <Text style={ styles.partLocationText}>Y:{(((prediction.x / 400) * Dimensions.get('window').width) -  ((Dimensions.get('window').width/400) * prediction.width/2)).toFixed(0)}</Text>
             </View>]
           
         
@@ -296,55 +293,23 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  partLocation:{
+  partLocationContainer:{
     position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 85,
-    bottom: 70,
-    color: "#ff0000",
-    opacity: .8,
-    zIndex: 75,
-    height: 75,
-    fontSize: 30,
+    left: Dimensions.get('screen').width / 2 - 90,
+    bottom: 30,
+    backgroundColor: "white",
+    opacity: .5,
+    zIndex: 100,
+    height: 120,
+    borderRadius: 10,
+    width: 185,
+
+    // justifyContent: 'center',
+    margin: 'auto',
   },
-  partLocationW:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    opacity: .7,
-    bottom: 35,
+  partLocationText:{
+    left: '30%',
     color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    fontSize: 15,
-  },
-  partLocationH:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    bottom: 20,
-    opacity: .7,
-    color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    fontSize: 15,
-  },
-  partLocationX:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    bottom: 0,
-    opacity: .7,
-    color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    fontSize: 15,
-  },
-  partLocationY:{
-    position: 'absolute',
-    left: Dimensions.get('screen').width / 2 - 35,
-    bottom: -15,
-    color: "#ff0000",
-    zIndex: 75,
-    height: 75,
-    opacity: .7,
-    fontSize: 15,
   },
 
   camera: {
