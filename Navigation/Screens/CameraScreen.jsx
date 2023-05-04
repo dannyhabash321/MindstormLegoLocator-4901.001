@@ -276,9 +276,9 @@ import * as Speech from 'expo-speech';
           </View>
         </Modal>
 
+        {model && [<Switch key= {1} style={styles.switch}  onValueChange={toggleSwitch} value={liveMode} />,
+        < Text key= {2} style={styles.switchText}>Live Mode</Text>]}
         
-        <Switch style={styles.switch}  onValueChange={toggleSwitch} value={liveMode} />
-        <Text style={styles.switchText}>Live Mode</Text>
         
         {/* this is the prediction for livemode, only fires if in live mode and if there is a prediction */}
         {legoPrediction && liveMode ? 
